@@ -1,6 +1,6 @@
 import os
 import logging
-
+import sys
 from mglib.runcmd import run
 from .conf import settings
 
@@ -61,8 +61,14 @@ def extract_img(page_path, media_root):
         )
     else:
         logger.debug(f"PPMROOT {ppmroot_dirname} already exists.")
+
+    if sys.platform == "win32":
+        cm_path = "pdftoppm"
+    else:
+        cm_path = settings.BINARY_PDFTOPPM
+
     cmd = (
-        settings.BINARY_PDFTOPPM,
+        cm_path,
         "-jpeg",
         "-f",
         str(page_num),
