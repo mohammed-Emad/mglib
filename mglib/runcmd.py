@@ -6,15 +6,17 @@ logger = logging.getLogger(__name__)
 
 
 def run(cmd):
+
     logger.debug(
         f"Run:{'|'.join(cmd)}"
     )
-
+    print(cmd)
     ret = subprocess.run(
         cmd,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        encoding="utf-8"
+        encoding="utf-8",
+        shell = True
     )
 
     if ret.returncode != 0:
