@@ -1,16 +1,18 @@
 import logging
+import magic
+
 from . import wrapper
 
 from .conf import settings
 
 logger = logging.getLogger(__name__)
 
-
 class Mime(wrapper.Wrapper):
     def __init__(self, filepath):
         super().__init__(exec_name=settings.BINARY_FILE)
         self.filepath = filepath
-
+        self.mime_magic = magic.Magic(mime=True)
+        
     def get_cmd(self):
         cmd = super().get_cmd()
 
@@ -35,10 +37,8 @@ class Mime(wrapper.Wrapper):
         return self.guess() in ('image/png', 'image/jpg', 'image/jpeg')
 
     def guess(self):
-        cmd = self.get_cmd()
-        complete = self.run(cmd)
 
-        return complete.stdout.strip()
+        return self.mime_magic.from_file(self.filepath)
 
     def __str__(self):
 
