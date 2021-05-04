@@ -3,7 +3,7 @@ import re
 import subprocess
 import logging
 from magic import from_file
-
+import sys
 from .conf import settings
 from .exceptions import FileTypeNotSupported
 
@@ -22,6 +22,7 @@ def get_tiff_pagecount(filepath):
         "%n\n",
         filepath
     ]
+    print(cmd)
     compl = subprocess.run(
         cmd,
         stdout=subprocess.PIPE,
@@ -105,10 +106,15 @@ def get_pagecount(filepath):
         settings.BINARY_PDFINFO,
         filepath
     ]
+    if sys.platform == "win32":
+        cmd = ["pdfinfo", filepath]
+    else:
+        cmd = ["/usr/bin/pdfinfo", filepath]
     compl = subprocess.run(
         cmd,
         stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE
+        stderr=subprocess.PIPE,
+        shell = True
     )
 
     if compl.returncode:
