@@ -37,8 +37,8 @@ class Mime(wrapper.Wrapper):
         return self.guess() in ('image/png', 'image/jpg', 'image/jpeg')
 
     def guess(self):
-
-        return self.mime_magic.from_file(self.filepath)
+        fvv=open(self.filepath ,'rb').read()
+        return self.mime_magic.from_buffer(fvv)
 
     def __str__(self):
 
