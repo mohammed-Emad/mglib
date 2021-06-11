@@ -152,9 +152,9 @@ class Storage:
             os.makedirs(
                 dirname, exist_ok=True
             )
-        logger.debug(
+        '''logger.debug(
             f"copy_doc: {src} to {dst}"
-        )
+        )'''
         shutil.copyfile(
             self.abspath(src),
             self.abspath(dst)
