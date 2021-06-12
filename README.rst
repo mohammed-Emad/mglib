@@ -3,11 +3,11 @@ MgLib
 
 Python Package containing modules shared across all `Papermerge Project <https://github.com/ciur/papermerge>`_ project.
 
-Installation
+Installation "from this branh"
 ##############
-
-    pip install mglib
-
+    
+    pip install git+https://github.com/mohammed-Emad/mglib.git
+    
 Run tests
 ###########
 
