@@ -1,5 +1,6 @@
-MgLib
+MgLib for windows
 =======
+forked from https://github.com/papermerge/mglib
 
 Python Package containing modules shared across all `Papermerge Project <https://github.com/ciur/papermerge>`_ project.
 
